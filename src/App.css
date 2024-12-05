@@ -1,12 +1,15 @@
 #root {
+  display: flex;
   flex-grow: 1;
-  background-color: var(--main-colour0);
+  background-color: white;
 }
 
 .app {
-  max-width: 1300px;
+  flex-grow: 1;
+  max-width: 1500px;
   margin-left: auto;
   margin-right: auto;
+  display: flex;
 }
 
 nav {
@@ -18,11 +21,14 @@ nav {
   color: white;
 }
 
-main {
+main.auth-page-main {
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   gap: 16px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .form-title {
@@ -32,7 +38,7 @@ main {
 }
 
 .auth-section {
-  border: 1px solid var(--main-colour3);
+  border: 1px solid var(--main-colour0);
   border-radius: 8px;
   padding: 32px;
 }
@@ -44,7 +50,7 @@ main {
   gap: 8px;
 
   > input {
-    color: var(--main-colour1);
+    color: var(--main-text-colour0);
     padding: 12px 16px;
     border-radius: 8px;
     border: 1px solid var(--main-colour3);
@@ -57,7 +63,7 @@ main {
 
   button {
     margin-top: 8px;
-    color: var(--main-colour1);
+    color: var(--main-text-colour0);
     background-color: var(--main-colour3);
     border: 1px solid var(--main-colour2);
     border-radius: 8px;
@@ -71,7 +77,91 @@ main {
 
   button:hover {
     border: 1px solid var(--main-colour3);
-    background-color: var(--main-colour0);
+    background-color: var(--main-colour1);
+    color: white;
+  }
+}
+
+.section-title {
+  font-size: 30px;
+  margin-bottom: 16px;
+}
+
+main.main-app {
+  color: var(--main-text-colour0);
+  display: flex;
+  flex-grow: 1;
+}
+
+.side-bar {
+  border-right: 1px solid lightgray;
+  display: flex;
+  flex-direction: column;
+  padding: 16px;
+
+  a {
     color: var(--main-text-colour0);
+  }
+}
+
+.main-display {
+  padding: 16px;
+  display: flex;
+  flex-grow: 1;
+}
+
+.all-users {
+  flex-grow: 1;
+}
+
+.all-user-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 12px;
+
+  > li {
+    display: flex;
+  }
+
+  .user-detail {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    padding: 8px 16px;
+
+    > h3 {
+      font-weight: 500;
+      font-size: 24px;
+    }
+
+    > button {
+      border: none;
+      padding: 8px;
+      border-radius: 4px;
+      box-shadow: rgba(0, 0, 0, 0.5) 0px 1px 3px;
+      color: var(--main-colour1);
+
+      transition-property: box-shadow color;
+      transition-duration: 100ms;
+      transition-timing-function: ease;
+    }
+
+    > button:hover {
+      box-shadow: rgba(0, 0, 0, 0.32) 0px 1px 7px;
+    }
+
+    > button:active {
+      background-color: var(--main-text-colour3);
+    }
+  }
+
+  .profile-pic {
+    border: 1px solid var(--main-colour1);
+    border-radius: 16px;
+    padding: 24px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 }

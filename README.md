@@ -6,12 +6,16 @@
 - https://vitest.dev/guide/snapshot.html
 - https://www.w3.org/TR/wai-aria-1.0/roles
 - https://www.w3.org/TR/html-aria/#docconformance
+- https://github.com/mrdulin/react-act-examples/blob/master/sync.md
+- https://www.theodinproject.com/lessons/node-path-react-new-mocking-callbacks-and-components
 
-[ ] Core App
+- https://dev.to/miracool/how-to-manage-user-authentication-with-react-js-3ic5
+- https://dayvster.com/blog/use-context-for-auth/
+
+- [ ] Core App
     - [ ] Authentication Page
-        - [ ] SignUp
-        - [ ] SignIn
-        - [ ] Auth Context
+        - [X] SignUp
+        - [X] SignIn
 
     - [ ] The Main App
         - [ ] Sidebar
@@ -22,7 +26,10 @@
         - [ ] When Click on User profile, expands user
             - [ ] Message User Option
 
-[ ] New Features
+    - [ ] Auth Context
+
+
+- [ ] New Features
     - [ ] User Status if they're online
     - [ ] Group Chats
     - [ ] Send Image

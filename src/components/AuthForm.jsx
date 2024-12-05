@@ -2,20 +2,22 @@ import PropTypes from "prop-types";
 
 const AuthForm = ({ type, fields }) => {
   return (
-    <section className="auth-section">
-      <h2 className="form-title">{type} To <span>Messaging App</span></h2>
-      <form className="auth-form">
-        {fields.map((field) => (
-          <input
-            key={field.name}
-            type={field.type}
-            name={field.name}
-            placeholder={field.placeholder}
-          />
-        ))}
-        <button>Submit</button>
-      </form>
-    </section>
+    <main className="auth-page-main">
+      <section className="auth-section">
+        <h2 className="form-title">{type} To <span>Messaging App</span></h2>
+        <form className="auth-form">
+          {fields.map((field) => (
+            <input
+              key={field.name}
+              type={field.type}
+              name={field.name}
+              placeholder={field.placeholder}
+            />
+          ))}
+          <button>Submit</button>
+        </form>
+      </section>
+    </main>
   );
 };
 
