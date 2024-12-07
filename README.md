@@ -19,13 +19,29 @@
 
     - [ ] The Main App
         - [ ] Sidebar
-            - [ ] See All Users
-            - [ ] See All Messaged Users
-            - [ ] Profile
+            - [X] See All Users
+            - [X] See All Messaged Users
+            - [X] Profile
+
+        - [ ] See All Users UI
+            - [X] Card that display user name
+            - [X] Button That says: view profile/add user to message
+                - [X] View Profile BTN
+                    - [X] Make them work
+                    - [X] Testing
+
+        - [ ] Message UI
+            - [X] Another sidebar that contains a list of messaged users
+            - [ ] To the right of that sidebar, there we display the actual interface
+            for communicating with the desired user.
+
+        - [ ] Customize Profile UI
         
         - [ ] When Click on User profile, expands user
             - [ ] Message User Option
 
+
+- [ ] BackENDDDD!!!!
     - [ ] Auth Context
 
 

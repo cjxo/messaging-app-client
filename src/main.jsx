@@ -11,6 +11,7 @@ import './App.css';
 import { SignIn, SignUp } from "./components/AuthForm.jsx";
 import App from "./routes/app";
 import User from "./routes/user";
+import Message from "./routes/message";
 import ErrorPage from "./routes/error-page";
 
 const router = createBrowserRouter([
@@ -23,6 +24,10 @@ const router = createBrowserRouter([
         path: "/users/:uid?",
         element: <User />,
       },
+      {
+        path: "/messages",
+        element: <Message />
+      }
     ],
   }, 
   {

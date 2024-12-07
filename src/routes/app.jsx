@@ -13,7 +13,7 @@ const App = () => {
               </Link>
             </li>
             <li>
-              <Link to="/chat">
+              <Link to="/messages">
                 Chat
               </Link>
             </li>
