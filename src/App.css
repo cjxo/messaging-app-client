@@ -253,6 +253,8 @@ main.main-app {
 .chat-interface {
   flex-grow: 1;
   border-right: 1px solid lightgray;
+  display: flex;
+  flex-direction: column;
 
   > header {
     padding: 16px;
@@ -264,42 +266,69 @@ main.main-app {
   }
 
   .chat-box {
-    padding: 16px;
     display: flex;
     flex-direction: column;
+    flex-grow: 1;
+    .exchanges {
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      
+      .message-exchange {
+        > .who {
+          font-weight: 500;
+        }
 
-    .message-exchange {
-      > .who {
-        font-weight: 500;
+        > .msg {
+          background-color: #EEEEEE;
+          width: fit-content;
+          padding: 16px;  
+          border-radius: 16px;
+          margin-top: 8px;
+        }
       }
 
-      > .msg {
-        background-color: #EEEEEE;
-        width: fit-content;
-        padding: 16px;  
-        border-radius: 16px;
-        margin-top: 8px;
+      .message-exchange.right {
+        margin-left: auto;
+
+        > .who {
+          text-align: right;
+        }
+
+        > .msg {
+          margin-right: 32px;
+          border-top-right-radius: 0px;
+        }
+      }
+
+      .message-exchange.left {
+        > .msg {
+          margin-left: 32px;
+          border-top-left-radius: 0px;
+        }
       }
     }
 
-    .message-exchange.right {
-      margin-left: auto;
+    > form {
+      padding: 16px;
+      border-top: 1px solid lightgray;
+      margin-top: auto;
+      display: flex;
+      gap: 16px;
+      align-items: end;
 
-      > .who {
-        text-align: right;
+      > textarea {
+        resize: none;
+        flex-grow: 1;
+        border-radius: 8px;
+        padding: 8px;
       }
 
-      > .msg {
-        margin-right: 32px;
-        border-top-right-radius: 0px;
+      > button {
+        padding: 8px 16px;
+        border-radius: 8px;
+        border: 1px solid transparent;
       }
     }
-
-    .message-exchange.left {
-      > .msg {
-        margin-left: 32px;
-        border-top-left-radius: 0px;
-      }
-    }
-  } 
+  }
 }

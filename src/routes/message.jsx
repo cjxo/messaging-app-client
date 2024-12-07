@@ -97,15 +97,22 @@ const Message = () => {
         </header>
   
         <section className="chat-box">
-          <div className="message-exchange left">
-            <p className="who">{messagedUsers.length ? messagedUsers[selectedIdx].firstName + " " + messagedUsers[selectedIdx].lastName : null}</p>
-            <p className="msg">ALKNSNAKNASANSkj</p>
+          <div className="exchanges">
+            <div className="message-exchange left">
+              <p className="who">{messagedUsers.length ? messagedUsers[selectedIdx].firstName + " " + messagedUsers[selectedIdx].lastName : null}</p>
+              <p className="msg">ALKNSNAKNASANSkj</p>
+            </div>
+
+            <div className="message-exchange right">
+              <p className="who">You</p>
+              <p className="msg">ALKNSNAKNASANSkj</p>
+            </div>
           </div>
 
-          <div className="message-exchange right">
-            <p className="who">You</p>
-            <p className="msg">ALKNSNAKNASANSkj</p>
-          </div>
+          <form>
+            <textarea rows="6"></textarea>
+            <button>Send</button>
+          </form>
         </section>
       </section>
     </>
