@@ -5,7 +5,7 @@ import { mdilAccount } from '@mdi/light-js';
 const MessageLi = ({ name, message, selected, setSelected }) => {
   const [hover, setHover] = useState(false);
 
-  const truncLength = Math.min(40, message.length);
+  const truncLength = Math.min(30, message.length);
   const trunced = truncLength < message.length;
   const truncated = message.substring(0, truncLength);
   return (
@@ -98,19 +98,47 @@ const Message = () => {
   
         <section className="chat-box">
           <div className="exchanges">
-            <div className="message-exchange left">
-              <p className="who">{messagedUsers.length ? messagedUsers[selectedIdx].firstName + " " + messagedUsers[selectedIdx].lastName : null}</p>
-              <p className="msg">ALKNSNAKNASANSkj</p>
-            </div>
-
-            <div className="message-exchange right">
-              <p className="who">You</p>
-              <p className="msg">ALKNSNAKNASANSkj</p>
-            </div>
+            {
+              messagedUsers.length ? (
+                messagedUsers[selectedIdx].messages.map((msg, idx) => (
+                  (msg.who === "from") ? (
+                    <div className="message-exchange left">
+                      <div className="user-detail">
+                        <div className="profile-pic">
+                          <Icon
+                            path={mdilAccount}
+                            title="User Profile"
+                            size={1.5}
+                          />
+                        </div>
+                        <p className="who">{messagedUsers.length ? messagedUsers[selectedIdx].firstName + " " + messagedUsers[selectedIdx].lastName : null}</p>
+                      </div>
+                      <p className="msg">{msg.msg}</p>
+                    </div>
+                  ) : (
+                    <div className="message-exchange right">
+                      <div className="user-detail">
+                        <p className="who">You</p>
+                        <div className="profile-pic">
+                          <Icon
+                            path={mdilAccount}
+                            title="User Profile"
+                            size={1.5}
+                          />
+                        </div>
+                      </div>
+                      <p className="msg">{msg.msg}</p>
+                    </div>
+                  )
+                ))
+              ) : (
+                null
+              )
+            }
           </div>
 
           <form>
-            <textarea rows="6"></textarea>
+            <textarea rows="4"></textarea>
             <button>Send</button>
           </form>
         </section>

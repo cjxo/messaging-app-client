@@ -32,8 +32,12 @@
 
         - [ ] Message UI
             - [X] Another sidebar that contains a list of messaged users
-            - [ ] To the right of that sidebar, there we display the actual interface
+            - [X] To the right of that sidebar, there we display the actual interface
             for communicating with the desired user.
+            - [ ] Make It Nice:
+                - [X] Profile Pic Per Exchange
+                - [ ] Nice Chat Box
+                - [X] WOrking Mapping Of Array TO Exchanges
 
         - [ ] Customize Profile UI
         

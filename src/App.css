@@ -95,12 +95,23 @@ main.main-app {
 
 .side-bar {
   border-right: 1px solid lightgray;
+  border-left: 1px solid lightgray;
   display: flex;
   flex-direction: column;
   padding: 16px;
 
+  ul {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
   a {
     color: var(--main-text-colour0);
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    font-size: 18px;
   }
 }
 
@@ -116,7 +127,7 @@ main.main-app {
 
 .all-user-list {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(364px, 1fr));
   gap: 12px;
 
   > li {
@@ -133,6 +144,7 @@ main.main-app {
     > h3 {
       font-weight: 500;
       font-size: 24px;
+      margin-bottom: 8px;
     }
 
     > div {
@@ -141,21 +153,29 @@ main.main-app {
     }
 
     .prof-options {
-      border: none;
+      border: 1px solid transparent;
       padding: 8px;
       border-radius: 4px;
-      box-shadow: rgba(0, 0, 0, 0.5) 0px 1px 3px;
       color: var(--main-colour1);
       text-align: center;
       background-color: white;
       font-size: 14px;
+    }
 
+    .prof-options.disabled {
+      background-color: #EEEEEE;
+      color: #AAAAAA;
+      border: 1px solid #AAAAAA;
+    }
+
+    .prof-options:not(.disabled) {
+      box-shadow: rgba(0, 0, 0, 0.5) 0px 1px 3px;
       transition-property: box-shadow color;
       transition-duration: 100ms;
       transition-timing-function: ease;
     }
 
-    .prof-options:hover {
+    .prof-options:not(.disabled):hover {
       box-shadow: rgba(0, 0, 0, 0.32) 0px 1px 7px;
     }
 
@@ -275,11 +295,17 @@ main.main-app {
       flex-direction: column;
       
       .message-exchange {
-        > .who {
+        .user-detail {
+          display: flex;
+          align-items: center;
+          gap: 8px;
+        }
+
+        .who {
           font-weight: 500;
         }
 
-        > .msg {
+        .msg {
           background-color: #EEEEEE;
           width: fit-content;
           padding: 16px;  
@@ -291,18 +317,23 @@ main.main-app {
       .message-exchange.right {
         margin-left: auto;
 
-        > .who {
+        .who {
+          margin-left: auto;
           text-align: right;
         }
 
-        > .msg {
+        .msg {
           margin-right: 32px;
           border-top-right-radius: 0px;
+        }
+
+        > .user-detail {
+          margin-left: auto;
         }
       }
 
       .message-exchange.left {
-        > .msg {
+        .msg {
           margin-left: 32px;
           border-top-left-radius: 0px;
         }
@@ -318,6 +349,7 @@ main.main-app {
       align-items: end;
 
       > textarea {
+        font-size: 16px;
         resize: none;
         flex-grow: 1;
         border-radius: 8px;
@@ -325,9 +357,21 @@ main.main-app {
       }
 
       > button {
+        transition-property: background-color box-shadow;
+        transition-duration: 100ms;
+        transition-timing-function: ease;
         padding: 8px 16px;
         border-radius: 8px;
         border: 1px solid transparent;
+        font-size: 16px;
+        background-color: #2e355a;
+        color: #e5e9ff;
+      }
+
+      > button:hover {
+        color: #2e355a;
+        background-color: white;
+        border: 1px solid #2e355a;
       }
     }
   }

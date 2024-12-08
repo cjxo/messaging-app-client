@@ -22,7 +22,7 @@ const UserLiCard = ({ username, userId, alreadyAdded, onAdd }) => {
           <Link className="prof-options" to={`/users/${userId}`}>View Profile</Link>
           {
             alreadyAdded ? (
-              <button className="" disabled aria-disabled="true">
+              <button className="prof-options disabled" disabled aria-disabled="true">
                 Already Added
               </button>
             ) : (
