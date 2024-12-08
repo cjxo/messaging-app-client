@@ -74,6 +74,17 @@ const Message = () => {
     ]);
   }, []);
 
+  const onSubmit = (e) => {
+    e.preventDefault();
+    const fd = new FormData(e.target);
+    
+    const newState = [...messagedUsers];
+    newState[selectedIdx].messages.push({ who: "to", msg: fd.get("message") });
+    setMessagedUsers(newState);
+
+    e.target.reset();
+  };
+
   return (
     <>
       <section className="messages">
@@ -137,8 +148,8 @@ const Message = () => {
             }
           </div>
 
-          <form>
-            <textarea rows="4"></textarea>
+          <form onSubmit={onSubmit}>
+            <textarea rows="4" name="message" required></textarea>
             <button>Send</button>
           </form>
         </section>

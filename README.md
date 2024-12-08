@@ -36,8 +36,10 @@
             for communicating with the desired user.
             - [ ] Make It Nice:
                 - [X] Profile Pic Per Exchange
-                - [ ] Nice Chat Box
+                - [X] Nice Chat Box
                 - [X] WOrking Mapping Of Array TO Exchanges
+
+        - [ ] make jaywon and jaylost appear also on users. remove the default users
 
         - [ ] Customize Profile UI
         
