@@ -50,7 +50,6 @@
 - [ ] BackENDDDD!!!!
     - [ ] Auth Context
 
-
 - [ ] New Features
     - [ ] User Status if they're online
     - [ ] Group Chats

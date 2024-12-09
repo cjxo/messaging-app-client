@@ -376,3 +376,46 @@ main.main-app {
     }
   }
 }
+
+.profile-view {
+  flex-grow: 1;
+  display: flex;
+  .user-detail {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    height: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 16px;
+
+    justify-content: space-between;
+    align-items: center;
+
+    .profile-pic {
+      width: 128px;
+      height: 128px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 8px;
+      border: 1px solid lightgray;
+    }
+
+    .user-identity {
+      font-size: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .label-value-pair {
+      display: flex;
+      gap: 8px;
+
+      > .label {
+        color: var(--main-text-colour1);
+      }
+    }
+  }
+}
