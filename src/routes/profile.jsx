@@ -1,6 +1,83 @@
 import { useState, useEffect } from "react";
+import PropTypes from "prop-types";
 import Icon from '@mdi/react';
-import { mdilAccount } from '@mdi/light-js';
+import {
+  mdilAccount,
+  mdilPencil,
+  mdilCheck,
+} from '@mdi/light-js';
+
+// Desired Edit Mode Type:
+// Only one and only one field is to be edited.
+// Hence, if one is editing one field and switched to another field
+// without saving, the new value is discarded.
+const IdentityField = ({ name, value, finalize }) => {
+  const [editMode, setEditMode] = useState(false);
+  const [inpValue, setInpValue] = useState(value);
+  if (editMode) {
+    const handleValueChange = (e) => {
+      setInpValue(e.target.value);
+    };
+
+    const handleSubmit = (e) => {
+      if (inpValue !== value) {
+        let type;
+        switch (name) {
+          case "Username": {
+            type = "username";
+          } break;
+
+          case "First Name": {
+            type = "firstName";
+          } break;
+
+          case "Last Name": {
+            type = "lastName";
+          } break;
+
+          case "Email": {
+            type = "email";
+          } break;
+        }
+
+        finalize(type, inpValue);
+      }
+      setEditMode(false);
+    };
+
+    return (
+      <form className="label-value-pair">
+        <label className="label">{name}: </label>
+        <input
+          type={name === "Email" ? "email" : "text"}
+          onChange={handleValueChange}
+          value={inpValue}
+        />
+        <button onClick={handleSubmit}>
+          <Icon
+            path={mdilCheck}
+            title={"Edit " + name}
+            size={1.0}
+          />
+        </button>
+      </form>
+    );
+  } else {
+    return (
+      <div className="label-value-pair">
+        <p className="label">{name}: </p>
+        <p>{inpValue}</p>
+        <button onClick={() => setEditMode(true)}>
+          <Icon
+            path={mdilPencil}
+            title={"Edit " + name}
+            size={1.0}
+          />
+        </button>
+    </div>
+    );
+  }
+};
 
 const Profile = () => {
   const [profile, setProfile] = useState(null);
@@ -14,6 +91,10 @@ const Profile = () => {
     });
   }, []);
 
+  const handleEdit = (type, value) => {
+      // TODO: api.user.changeDetail({ type, value });
+  };
+  
   if (profile) {
     return (
       <section className="profile-view">
@@ -27,20 +108,10 @@ const Profile = () => {
           </div>
           
           <div className="user-identity">
-            <div className="label-value-pair">
-              <p className="label">Username: </p>
-              <p>{profile.username}</p>
-            </div>
-
-            <div className="label-value-pair">
-              <p className="label">Name: </p>
-              <p>{profile.firstName} {profile.lastName}</p>
-            </div>
-
-            <div className="label-value-pair">
-              <p className="label">Email: </p>
-              <p>{profile.email}</p>
-            </div>
+            <IdentityField name={"Username"} value={profile.username} finalize={handleEdit} />
+            <IdentityField name={"First Name"} value={profile.firstName} finalize={handleEdit} />
+            <IdentityField name={"Last Name"} value={profile.lastName} finalize={handleEdit} />
+            <IdentityField name={"Email"} value={profile.email} finalize={handleEdit} />
           </div>
         </div>
       </section>
@@ -50,6 +121,12 @@ const Profile = () => {
       null
     );
   }
+};
+
+IdentityField.propTypes = {
+  name: PropTypes.oneOf(["Username", "First Name", "Last Name", "Email"]).isRequired,
+  value: PropTypes.string.isRequired,
+  finalize: PropTypes.func.isRequired,
 };
 
 export default Profile;

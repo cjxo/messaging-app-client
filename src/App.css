@@ -412,9 +412,21 @@ main.main-app {
     .label-value-pair {
       display: flex;
       gap: 8px;
+      align-items: center;
 
       > .label {
         color: var(--main-text-colour1);
+      }
+
+      > button {
+        background-color: transparent;
+        border: 1px solid transparent;
+      }
+
+      > input {
+        border-radius: 4px;
+        padding: 8px 8px;
+        border: 1px solid gray;
       }
     }
   }

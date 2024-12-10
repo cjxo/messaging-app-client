@@ -42,6 +42,7 @@
         - [ ] make jaywon and jaylost appear also on users. remove the default users
 
         - [ ] Customize Profile UI
+            - [ ] Finish TODO said on file
         
         - [ ] When Click on User profile, expands user
             - [ ] Message User Option
