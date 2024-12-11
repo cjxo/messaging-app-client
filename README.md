@@ -39,8 +39,6 @@
                 - [X] Nice Chat Box
                 - [X] WOrking Mapping Of Array TO Exchanges
 
-        - [ ] make jaywon and jaylost appear also on users. remove the default users
-
         - [ ] Customize Profile UI
             - [ ] Finish TODO said on file
         
@@ -49,6 +47,7 @@
 
 
 - [ ] BackENDDDD!!!!
+    - [ ] Detect If User has token/is signed in.
     - [ ] Auth Context
 
 - [ ] New Features

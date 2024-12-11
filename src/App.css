@@ -377,6 +377,14 @@ main.main-app {
   }
 }
 
+.error-message {
+  background-color: #e56969;
+  padding: 12px 16px;
+  border-radius: 8px;
+  margin-bottom: 8px;
+  color: white;
+}
+
 .profile-view {
   flex-grow: 1;
   display: flex;
