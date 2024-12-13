@@ -6,6 +6,7 @@ import {
   RouterProvider,
 } from "react-router-dom";
 
+import { AuthProvider } from "./hooks/Auth.jsx";
 import './index.css';
 import './App.css';
 import { SignIn, SignUp } from "./components/AuthForm.jsx";
@@ -47,6 +48,8 @@ const router = createBrowserRouter([
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <RouterProvider router={router} />
+    <AuthProvider>
+      <RouterProvider router={router} />
+    </AuthProvider>
   </StrictMode>,
 );

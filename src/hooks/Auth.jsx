@@ -1,34 +1,43 @@
 import { createContext, useContext, useState, useEffect } from "react";
+import api from "../api/api.js";
 
 const AuthContext = createContext(null);
 
 const AuthProvider = ({ children }) => {
-  const [token, setToken]         = useState("");
+  const [isAuth, setIsAuth]       = useState(false);
   const [isLoading, setIsLoading] = useState(true);
 
-  const fetchToken = async () => {
-    // TODO: fetch access token
-    setToken("NAUR");
-    setIsLoading(false);
-  };
-
   useEffect(() => {
-    const key = setInterval(() => {
-      fetchToken();
-    }, 14 * 60 * 1000); // 14 min expiry of access token, so refetch after 14 min
-  
-    fetchToken();
-    return () => clearInterval(key);
-  }, [token]);
+    const checkAuth = async () => {
+      const result = await api.auth.isAuth();
+      setIsAuth(result.ok);
+      setIsLoading(false);
+      console.log(result);
+    };
 
-  const signin = () => {
+    checkAuth();
+  }, []);
+
+  const signIn = async (username, password) => {
+    const result = await api.auth.signIn(username, password);
+    if (result.ok) {
+      setIsAuth(true);
+    }
+    return result;
   };
 
-  const signup = () => {
+  const signUp = async (firstName, lastName, username, email, password) => {
+    const result = await api.auth.signUp(firstName, lastName, username, email, password);
+    return result;
+  };
+
+  const signOut = () => {
+    setIsAuth(false);
+    api.auth.signOut();
   };
 
   return (
-    <AuthContext.Provider value={{ isLoading, token, signin, signup }}>
+    <AuthContext.Provider value={{ isLoading, isAuth, signIn, signUp, signOut }}>
       {children}
     </AuthContext.Provider>
   );

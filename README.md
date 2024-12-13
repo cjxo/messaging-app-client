@@ -47,8 +47,15 @@
 
 
 - [ ] BackENDDDD!!!!
-    - [ ] Detect If User has token/is signed in.
     - [ ] Auth Context
+        - [ ] Detect If User has token/is signed in.
+        - [ ] If so, redirect to main UI
+
+    - [ ] Sign Out
+    - [ ] Clean Up API, esp. fetch
+
+- [ ] Loading PagE!!!!!!!
+    - Both Are used on Dash and Auth pages
 
 - [ ] New Features
     - [ ] User Status if they're online

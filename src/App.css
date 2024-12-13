@@ -439,3 +439,19 @@ main.main-app {
     }
   }
 }
+
+.sign-out-btn {
+  margin-top: auto;
+  background-color: transparent;
+  border: 1px solid transparent;
+  width: fit-content;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.sign-out-btn:hover {
+  color: #445ad1;
+}

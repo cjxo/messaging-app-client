@@ -39,6 +39,7 @@ export default {
 
       return result;
     },
+    
     signIn: async (username, password) => {
       const result = {
         ok: false,
@@ -69,7 +70,54 @@ export default {
       }
     
       return result;
-    }
+    },
+
+    isAuth: async () => {
+      const result = {
+        ok: false,
+        message: "",
+      };
+
+      try {
+        const response = await fetch(getUrl("/auth/check-auth"), {
+          method: "GET",
+          mode: "cors",
+          credentials: "include",
+        });
+
+        const data = await response.json();
+
+        result.ok = response.ok;
+        result.message = data.message;
+      } catch (err) {
+        result.message = err.stack;
+      }
+
+      return result;
+    },
+
+    signOut: async () => {
+      const result = {
+        ok: false,
+        message: "",
+      };
+
+      try {
+        const response = await fetch(getUrl("/auth/sign-out"), {
+          method: "POST",
+          mode: "cors",
+          credentials: "include",
+        });
+
+        const data = await response.json();
+        result.ok = response.ok;
+        result.message = data.message;
+      } catch (err) {
+        result.message = err.stack;
+      }
+
+      return result;
+    },
   },
 
   user: {

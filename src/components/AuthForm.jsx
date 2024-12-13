@@ -1,8 +1,21 @@
 import { useState } from "react";
+import { useNavigate, Navigate } from "react-router-dom";
 import PropTypes from "prop-types";
+
 import api from "../api/api";
+import { useAuth } from "../hooks/Auth.jsx";
 
 const AuthForm = ({ type, fields, handleSubmit, errMsg }) => {
+  const auth = useAuth();
+
+  if (auth.isLoading) {
+    return <div>Loading...</div>
+  }
+
+  if (auth.isAuth) {
+    return <Navigate to="/" />;
+  }
+
   return (
     <main className="auth-page-main">
       <section className="auth-section">
@@ -36,6 +49,9 @@ const AuthForm = ({ type, fields, handleSubmit, errMsg }) => {
 };
 
 const SignIn = () => {
+  const auth = useAuth();
+  const navigate = useNavigate();
+
   const [errMsg, setErrMsg] = useState("");
   const signInFields = [
     { type: 'text', name: 'username', placeholder: 'Username' },
@@ -49,8 +65,8 @@ const SignIn = () => {
     const username = fd.get("username");
     const password = fd.get("password");
 
-    api
-      .auth
+    //auth.signUp();
+    auth
       .signIn(username, password)
       .then(result => {
         if (!result.ok) {
@@ -58,6 +74,7 @@ const SignIn = () => {
           return;
         }
 
+        navigate("/");
         console.log(result.message);
         setErrMsg("");
       });
@@ -66,6 +83,8 @@ const SignIn = () => {
 };
 
 const SignUp = () => {
+  const auth = useAuth();
+  const navigate = useNavigate();
   const [errMsg, setErrMsg] = useState("");
   const signUpFields = [
     { type: 'text', name: 'first_name', placeholder: 'First Name' },
@@ -97,17 +116,17 @@ const SignUp = () => {
       return;
     }
 
-    api
-      .auth
+    auth
       .signUp(firstName, lastName, username, email, password)
       .then(result => {
         if (!result.ok) {
           setErrMsg(result.message);
           return;
         }
-
-        console.log(result.message);
+      
         setErrMsg("");
+        navigate("/sign-in");
+        console.log(result.message);
       });
   };
 

@@ -1,4 +1,4 @@
-import { Link, Outlet, useLocation } from "react-router-dom";
+import { Link, Outlet, useLocation, Navigate, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import {
   mdiAccountGroupOutline,
@@ -10,6 +10,8 @@ import {
   mdiLogout,
 } from '@mdi/js';
 import Icon from '@mdi/react';
+import api from "../api/api";
+import { useAuth } from "../hooks/Auth";
 
 const SidebarLi = ({ mdi, mdiO, title, to, selected }) => {
   const [hover, setHover] = useState(false);
@@ -34,7 +36,25 @@ const SidebarLi = ({ mdi, mdiO, title, to, selected }) => {
 };
 
 const App = () => {
+  const [signOutHover, setSignOutHover] = useState(false);
+
+  const auth = useAuth();
   const location = useLocation();
+  const navigate = useNavigate();
+
+  if (auth.isLoading) {
+    return <div>Loading...</div>
+  }
+
+  if (!auth.isAuth) {
+    return <Navigate to="/sign-in" />;
+  }
+
+  const handleSignOut = () => {
+    auth.signOut();
+    navigate("/sign-in");
+  };
+
   let path;
   const slashIdx = location.pathname.substring(1, location.pathname.length).indexOf("/");
   if (slashIdx === -1) {
@@ -42,6 +62,7 @@ const App = () => {
   } else {
     location.pathname.substring(0, path + 1);
   }
+
   return (
     <div className="app">
       <main className="main-app">
@@ -70,6 +91,22 @@ const App = () => {
               selected={location.pathname === "/profile"}
             />
           </ul>
+          
+          <button
+            className="sign-out-btn"
+            onMouseEnter={() => setSignOutHover(true)}
+            onMouseLeave={() => setSignOutHover(false)}
+            onClick={() => handleSignOut()}
+          >
+            <Icon
+              path={mdiLogout}
+              title={"Sign Out"}
+              size={1.5}
+              color={signOutHover ? "#445ad1" : "black"}
+            />
+            <p>Sign Out</p>
+          </button>
+
         </section>
         <section className="main-display">
           <Outlet />

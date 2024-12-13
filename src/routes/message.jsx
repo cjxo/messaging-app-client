@@ -113,7 +113,7 @@ const Message = () => {
               messagedUsers.length ? (
                 messagedUsers[selectedIdx].messages.map((msg, idx) => (
                   (msg.who === "from") ? (
-                    <div className="message-exchange left">
+                    <div className="message-exchange left" key={idx}>
                       <div className="user-detail">
                         <div className="profile-pic">
                           <Icon
@@ -127,7 +127,7 @@ const Message = () => {
                       <p className="msg">{msg.msg}</p>
                     </div>
                   ) : (
-                    <div className="message-exchange right">
+                    <div className="message-exchange right" key={idx}>
                       <div className="user-detail">
                         <p className="who">You</p>
                         <div className="profile-pic">
