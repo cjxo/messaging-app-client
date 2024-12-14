@@ -52,10 +52,10 @@
         - [X] If so, redirect to main UI
 
     - [X] Sign Out
-    - [ ] Clean Up API, esp. fetch
+    - [X] Clean Up API, esp. fetch
     
     - [ ] Users tab: 
-        - [ ] Display actual users of the system!
+        - [X] Display actual users of the system!
         - [ ] Working Add To Chat!
 
     - [ ] Messages

@@ -1,9 +1,11 @@
 import { useParams, Link } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 
 import Icon from '@mdi/react';
 import { mdilAccount } from '@mdi/light-js';
+
+import api from "../api/api";
 
 const UserLiCard = ({ username, userId, alreadyAdded, onAdd }) => {
   return (
@@ -42,19 +44,17 @@ const UserLiCard = ({ username, userId, alreadyAdded, onAdd }) => {
 
 const User = () => {
   const userParam = useParams();
+  const [users, setUsers] = useState([]);
 
-  const [users, setUsers] = useState([
-    {
-      id: 1,
-      username: "gigglesbiggles",
-      alreadyAdded: false,
-    },
-    {
-      id: 2,
-      username: "whiggle",
-      alreadyAdded: true,
-    }
-  ]);
+  useEffect(() => {
+    api
+      .user
+      .getAllExceptMe()
+      .then(result => {
+        console.log(result.message);
+        setUsers(result.users);
+      });
+  }, []);
 
   const onAdd = (idx) => {
     const usersPrime = [...users];
@@ -75,7 +75,7 @@ const User = () => {
             <UserLiCard key={user.id}
               username={user.username}
               userId={user.id}
-              alreadyAdded={user.alreadyAdded}
+              alreadyAdded={user.alreadyadded}
               onAdd={() => onAdd(idx)}
             />
           ))}
