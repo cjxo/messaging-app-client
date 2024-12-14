@@ -2,122 +2,43 @@ const getUrl = (rel) => {
   return "http://localhost:3000" + rel;
 };
 
+const fetch2 = async (resource, method, body) => {
+  try {
+    const response = await fetch(getUrl(resource), {
+      method,
+      mode: "cors",
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: body ? JSON.stringify(body) : undefined,
+    });
+
+    const data = await response.json();
+
+    return {
+      ok: response.ok,
+      ...data,
+    };
+  } catch (err) {
+    return {
+      ok: false,
+      message: err.stack,
+    };
+  }
+
+  return result;
+};
+
 // https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers
 // https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch
 // https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Set-Cookie#samesitesamesite-value
 export default {
   auth: {
-    signUp: async (firstName, lastName, username, email, password) => {
-      const result = {
-        ok: false,
-        message: "",
-      };
-
-      try {
-        const request = await fetch(getUrl("/auth/sign-up"), {
-          method: "POST",
-          mode: "cors",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            firstName,
-            lastName,
-            username,
-            email,
-            password,
-          }),
-        });
-
-        const data = await request.json();
-
-        result.ok = request.ok;
-        result.message = data.message;
-      } catch (err) {
-        result.message = err.stack;
-      }
-
-      return result;
-    },
-    
-    signIn: async (username, password) => {
-      const result = {
-        ok: false,
-        message: "",
-      };
-
-      try {
-        const response = await fetch(getUrl("/auth/sign-in"), {
-          method: "POST",
-          mode: "cors",
-          credentials: "include",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            username,
-            password,
-          }),
-        });
-
-        const data = await response.json();
-
-        result.ok = response.ok;
-        result.message = data.message;
-
-      } catch (err) {
-        result.message = err.stack;
-      }
-    
-      return result;
-    },
-
-    isAuth: async () => {
-      const result = {
-        ok: false,
-        message: "",
-      };
-
-      try {
-        const response = await fetch(getUrl("/auth/check-auth"), {
-          method: "GET",
-          mode: "cors",
-          credentials: "include",
-        });
-
-        const data = await response.json();
-
-        result.ok = response.ok;
-        result.message = data.message;
-      } catch (err) {
-        result.message = err.stack;
-      }
-
-      return result;
-    },
-
-    signOut: async () => {
-      const result = {
-        ok: false,
-        message: "",
-      };
-
-      try {
-        const response = await fetch(getUrl("/auth/sign-out"), {
-          method: "POST",
-          mode: "cors",
-          credentials: "include",
-        });
-
-        const data = await response.json();
-        result.ok = response.ok;
-        result.message = data.message;
-      } catch (err) {
-        result.message = err.stack;
-      }
-
-      return result;
-    },
+    signUp: async (firstName, lastName, username, email, password) => await fetch2("/auth/sign-up", "POST", { firstName, lastName, username, email, password }),
+    signIn: async (username, password) => await fetch2("/auth/sign-in", "POST", { username, password }),
+    isAuth: async () => await fetch2("/auth/check-auth", "GET"),
+    signOut: async () => await fetch2("/auth/sign-out", "POST"),
   },
 
   user: {

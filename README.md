@@ -23,14 +23,14 @@
             - [X] See All Messaged Users
             - [X] Profile
 
-        - [ ] See All Users UI
+        - [X] See All Users UI
             - [X] Card that display user name
             - [X] Button That says: view profile/add user to message
                 - [X] View Profile BTN
                     - [X] Make them work
                     - [X] Testing
 
-        - [ ] Message UI
+        - [X] Message UI
             - [X] Another sidebar that contains a list of messaged users
             - [X] To the right of that sidebar, there we display the actual interface
             for communicating with the desired user.
@@ -39,20 +39,30 @@
                 - [X] Nice Chat Box
                 - [X] WOrking Mapping Of Array TO Exchanges
 
-        - [ ] Customize Profile UI
-            - [ ] Finish TODO said on file
+        - [X] Customize Profile UI
+            - [X] Finish TODO said on file
         
-        - [ ] When Click on User profile, expands user
-            - [ ] Message User Option
+        - [X] When Click on User profile, expands user
+            - [X] Message User Option
 
 
 - [ ] BackENDDDD!!!!
-    - [ ] Auth Context
-        - [ ] Detect If User has token/is signed in.
-        - [ ] If so, redirect to main UI
+    - [X] Auth Context
+        - [X] Detect If User has token/is signed in.
+        - [X] If so, redirect to main UI
 
-    - [ ] Sign Out
+    - [X] Sign Out
     - [ ] Clean Up API, esp. fetch
+    
+    - [ ] Users tab: 
+        - [ ] Display actual users of the system!
+        - [ ] Working Add To Chat!
+
+    - [ ] Messages
+        - [ ] Display actual added users to chat!
+    
+    - [ ] Profile
+        - [ ] Working Profile Edit
 
 - [ ] Loading PagE!!!!!!!
     - Both Are used on Dash and Auth pages
