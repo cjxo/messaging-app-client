@@ -52,5 +52,9 @@ export default {
   },
 
   message: {
+    addUser: async (userId) => {
+      const result = await fetch2("/message/add-user", "POST", { userId });
+      return result;
+    },
   },
 };

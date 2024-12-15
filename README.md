@@ -54,9 +54,9 @@
     - [X] Sign Out
     - [X] Clean Up API, esp. fetch
     
-    - [ ] Users tab: 
+    - [X] Users tab: 
         - [X] Display actual users of the system!
-        - [ ] Working Add To Chat!
+        - [X] Working Add To Chat!
 
     - [ ] Messages
         - [ ] Display actual added users to chat!

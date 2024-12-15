@@ -46,7 +46,7 @@ const User = () => {
   const userParam = useParams();
   const [users, setUsers] = useState([]);
 
-  useEffect(() => {
+useEffect(() => {
     api
       .user
       .getAllExceptMe()
@@ -58,10 +58,15 @@ const User = () => {
 
   const onAdd = (idx) => {
     const usersPrime = [...users];
-    usersPrime[idx].alreadyAdded = true;
+    usersPrime[idx].alreadyadded = true;
     setUsers(usersPrime);
 
-    // TODO: api.msg.addUser(userId);
+    api
+      .message
+      .addUser(users[idx].id)
+      .then(result => {
+        console.log(result);
+      });
   };
 
   if (Object.hasOwn(userParam, "uid")) {
