@@ -59,7 +59,8 @@
         - [X] Working Add To Chat!
 
     - [ ] Messages
-        - [ ] Display actual added users to chat!
+        - [X] Display actual added users to chat!
+        - [ ] Working Message Sending
     
     - [ ] Profile
         - [ ] Working Profile Edit

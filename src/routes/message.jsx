@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import Icon from '@mdi/react';
 import { mdilAccount } from '@mdi/light-js';
+import api from "../api/api";
 
 const MessageLi = ({ name, message, selected, setSelected }) => {
   const [hover, setHover] = useState(false);
@@ -40,38 +41,34 @@ const Message = () => {
 
   useEffect(() => {
     // TODO: fetch messaged users!
-    setMessagedUsers([
-      {
-        id: 1,
-        firstName: "Jay",
-        lastName: "Won",
-        messages: [
-          {
-            who: "from",
-            msg: "Have you watch the recent From season 3 episode titled 'Revelations'?",
-          },
-          {
-            who: "to",
-            msg: "HAHA thats quite an episode! It turns out the townspeople sacrificed their children for eternal life!"
-          },
-        ]
-      },
-      {
-        id: 2,
-        firstName: "Jay",
-        lastName: "Lost",
-        messages: [
-          {
-            who: "from",
-            msg: "Have you watch the recent From season 3 episode titled 'Revelations'?",
-          },
-          {
-            who: "to",
-            msg: "HAHA thats quite an episode! It turns out the townspeople sacrificed their children for eternal life!"
-          },
-        ]
-      }
-    ]);
+    const fetchMessagedUsers = async () => {
+      const result = await api.message.getAll();
+      setMessagedUsers([
+        {
+          id: 1,
+          first_name: "Jay",
+          last_name: "Won",
+          who: ["from", "to"],
+          messages: [
+              "Have you watch the recent From season 3 episode titled 'Revelations'?",
+              "HAHA thats quite an episode! It turns out the townspeople sacrificed their children for eternal life!",
+          ]
+        },
+        {
+          id: 2,
+          first_name: "Jay",
+          last_name: "Lost",
+          who: ["from", "to"],
+          messages: [
+              "Have you watch the recent From season 3 episode titled 'Revelations'?",
+              "HAHA thats quite an episode! It turns out the townspeople sacrificed their children for eternal life!",
+          ]
+        },
+        ...result.users,
+      ]);
+    };
+    
+    fetchMessagedUsers();
   }, []);
 
   const onSubmit = (e) => {
@@ -93,8 +90,8 @@ const Message = () => {
           {messagedUsers.map((msg, idx) => (
               <MessageLi
                 key={msg.id}
-                name={msg.firstName + " " + msg.lastName}
-                message={msg.messages[msg.messages.length - 1].msg}
+                name={msg.first_name + " " + msg.last_name}
+                message={msg.messages[msg.messages.length - 1]}
                 selected={selectedIdx === idx}
                 setSelected={() => setSelectedIdx(idx)}
               />
@@ -104,7 +101,7 @@ const Message = () => {
       </section>
       <section className="chat-interface">
         <header>
-          <h2 className="message-sidebar-title ">{messagedUsers.length ? messagedUsers[selectedIdx].firstName + " " + messagedUsers[selectedIdx].lastName : null}</h2>
+          <h2 className="message-sidebar-title ">{messagedUsers.length ? messagedUsers[selectedIdx].first_name + " " + messagedUsers[selectedIdx].last_name : null}</h2>
         </header>
   
         <section className="chat-box">
@@ -112,7 +109,7 @@ const Message = () => {
             {
               messagedUsers.length ? (
                 messagedUsers[selectedIdx].messages.map((msg, idx) => (
-                  (msg.who === "from") ? (
+                  (messagedUsers[selectedIdx].who[idx] === "from") ? (
                     <div className="message-exchange left" key={idx}>
                       <div className="user-detail">
                         <div className="profile-pic">
@@ -122,9 +119,9 @@ const Message = () => {
                             size={1.5}
                           />
                         </div>
-                        <p className="who">{messagedUsers.length ? messagedUsers[selectedIdx].firstName + " " + messagedUsers[selectedIdx].lastName : null}</p>
+                        <p className="who">{messagedUsers.length ? messagedUsers[selectedIdx].first_name + " " + messagedUsers[selectedIdx].last_name : null}</p>
                       </div>
-                      <p className="msg">{msg.msg}</p>
+                      <p className="msg">{msg}</p>
                     </div>
                   ) : (
                     <div className="message-exchange right" key={idx}>
@@ -138,7 +135,7 @@ const Message = () => {
                           />
                         </div>
                       </div>
-                      <p className="msg">{msg.msg}</p>
+                      <p className="msg">{msg}</p>
                     </div>
                   )
                 ))
