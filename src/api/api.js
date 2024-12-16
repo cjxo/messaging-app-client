@@ -45,8 +45,8 @@ export default {
       return result
     },
 
-    changeDetail: async (type, value) => {
-    },
+    getProfile: async () => await fetch2("/user", "GET"),
+    updateCredential: async (type, value) => await fetch2("/user/update", "POST", { type, value }),
   },
 
   message: {

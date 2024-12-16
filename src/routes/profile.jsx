@@ -6,6 +6,7 @@ import {
   mdilPencil,
   mdilCheck,
 } from '@mdi/light-js';
+import api from "../api/api";
 
 // Desired Edit Mode Type:
 // Only one and only one field is to be edited.
@@ -20,6 +21,7 @@ const IdentityField = ({ name, value, finalize }) => {
     };
 
     const handleSubmit = (e) => {
+      e.preventDefault();
       if (inpValue !== value) {
         let type;
         switch (name) {
@@ -28,11 +30,11 @@ const IdentityField = ({ name, value, finalize }) => {
           } break;
 
           case "First Name": {
-            type = "firstName";
+            type = "first_name";
           } break;
 
           case "Last Name": {
-            type = "lastName";
+            type = "last_name";
           } break;
 
           case "Email": {
@@ -42,6 +44,8 @@ const IdentityField = ({ name, value, finalize }) => {
 
         finalize(type, inpValue);
       }
+
+      setInpValue(value);
       setEditMode(false);
     };
 
@@ -66,7 +70,7 @@ const IdentityField = ({ name, value, finalize }) => {
     return (
       <div className="label-value-pair">
         <p className="label">{name}: </p>
-        <p>{inpValue}</p>
+        <p>{value}</p>
         <button onClick={() => setEditMode(true)}>
           <Icon
             path={mdilPencil}
@@ -83,16 +87,27 @@ const Profile = () => {
   const [profile, setProfile] = useState(null);
 
   useEffect(() => {
-    setProfile({
-      username: "gigglesbiggles",
-      firstName: "FirstName",
-      lastName: "LastName",
-      email: "FakeEmail@email.com",
-    });
+    api
+      .user
+      .getProfile()
+      .then(result => {
+        if (result.ok) {
+          setProfile(result.profile);
+        }
+      });
   }, []);
 
   const handleEdit = (type, value) => {
-      // TODO: api.user.changeDetail({ type, value });
+    api
+      .user
+      .updateCredential(type, value)
+      .then(result => {
+        if (result.ok) {
+          const profilePrime = { ...profile };
+          profilePrime[type] = value;
+          setProfile(profilePrime);
+        }
+      });
   };
   
   if (profile) {
@@ -109,8 +124,8 @@ const Profile = () => {
           
           <div className="user-identity">
             <IdentityField name={"Username"} value={profile.username} finalize={handleEdit} />
-            <IdentityField name={"First Name"} value={profile.firstName} finalize={handleEdit} />
-            <IdentityField name={"Last Name"} value={profile.lastName} finalize={handleEdit} />
+            <IdentityField name={"First Name"} value={profile.first_name} finalize={handleEdit} />
+            <IdentityField name={"Last Name"} value={profile.last_name} finalize={handleEdit} />
             <IdentityField name={"Email"} value={profile.email} finalize={handleEdit} />
           </div>
         </div>
