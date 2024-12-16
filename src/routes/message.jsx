@@ -57,8 +57,17 @@ const Message = () => {
     const fd = new FormData(e.target);
     
     const newState = [...messagedUsers];
-    newState[selectedIdx].messages.push({ who: "to", msg: fd.get("message") });
+    if (messagedUsers[selectedIdx].messages[0]) {
+      newState[selectedIdx].messages.push(fd.get("message"));
+      newState[selectedIdx].who.push("to");
+    } else {
+      newState[selectedIdx].messages = [fd.get("message")];
+      newState[selectedIdx].who = ["to"];
+    }
+
     setMessagedUsers(newState);
+
+    api.message.sendTo(messagedUsers[selectedIdx].id, fd.get("message"));
 
     e.target.reset();
   };

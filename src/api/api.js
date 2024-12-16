@@ -51,9 +51,7 @@ export default {
 
   message: {
     addUser: async (userId) => await fetch2("/message/add-user", "POST", { userId }),
-    getAll: async () => {
-      const result = await fetch2("/message/get-all", "GET");
-      return result;
-    },
+    getAll: async () => await fetch2("/message/get-all", "GET"),
+    sendTo: async (sendToUserId, message) => await fetch2("/message/send-to", "POST", { sendToUserId, message }),
   },
 };
