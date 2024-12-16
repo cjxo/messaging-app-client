@@ -26,8 +26,6 @@ const fetch2 = async (resource, method, body) => {
       message: err.stack,
     };
   }
-
-  return result;
 };
 
 // https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers

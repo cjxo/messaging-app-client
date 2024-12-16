@@ -43,27 +43,8 @@ const Message = () => {
     // TODO: fetch messaged users!
     const fetchMessagedUsers = async () => {
       const result = await api.message.getAll();
+      console.log(result);
       setMessagedUsers([
-        {
-          id: 1,
-          first_name: "Jay",
-          last_name: "Won",
-          who: ["from", "to"],
-          messages: [
-              "Have you watch the recent From season 3 episode titled 'Revelations'?",
-              "HAHA thats quite an episode! It turns out the townspeople sacrificed their children for eternal life!",
-          ]
-        },
-        {
-          id: 2,
-          first_name: "Jay",
-          last_name: "Lost",
-          who: ["from", "to"],
-          messages: [
-              "Have you watch the recent From season 3 episode titled 'Revelations'?",
-              "HAHA thats quite an episode! It turns out the townspeople sacrificed their children for eternal life!",
-          ]
-        },
         ...result.users,
       ]);
     };
@@ -91,7 +72,7 @@ const Message = () => {
               <MessageLi
                 key={msg.id}
                 name={msg.first_name + " " + msg.last_name}
-                message={msg.messages[msg.messages.length - 1]}
+                message={msg.messages[msg.messages.length - 1] || ""}
                 selected={selectedIdx === idx}
                 setSelected={() => setSelectedIdx(idx)}
               />
@@ -107,7 +88,7 @@ const Message = () => {
         <section className="chat-box">
           <div className="exchanges">
             {
-              messagedUsers.length ? (
+              (messagedUsers.length && messagedUsers[selectedIdx].messages[0]) ? (
                 messagedUsers[selectedIdx].messages.map((msg, idx) => (
                   (messagedUsers[selectedIdx].who[idx] === "from") ? (
                     <div className="message-exchange left" key={idx}>

@@ -60,6 +60,7 @@
 
     - [ ] Messages
         - [X] Display actual added users to chat!
+        - [X] Fix Bug Where Not Displaying Added Users (This occurs when the user hasn't send any message yet)
         - [ ] Working Message Sending
     
     - [ ] Profile
