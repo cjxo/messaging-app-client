@@ -49,9 +49,6 @@ const Message = () => {
       console.log(result);
       setMessagedUsers([
         ...result.users,
-        ...result.users,
-        ...result.users,
-        ...result.users,
       ]);
     };
     
@@ -66,7 +63,7 @@ const Message = () => {
       if (headerElement && formElement && h2Element) {
         const viewportHeight = window.innerHeight;
         setMaxExchangesHeight(viewportHeight - (headerElement.offsetHeight + formElement.offsetHeight) - 1);
-        setMaxMessageListHeight(viewportHeight - h2Element.offsetHeight * 2.5); // WHY?
+        setMaxMessageListHeight(viewportHeight - h2Element.offsetHeight * 2.5 - 3); // WHY?
         return true;
       }
 
