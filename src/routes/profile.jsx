@@ -42,7 +42,13 @@ const IdentityField = ({ name, value, finalize }) => {
           } break;
         }
 
-        finalize(type, inpValue);
+        finalize(type, inpValue)
+        .then(result => {
+          if (result) {
+            setInpValue(inpValue);
+          }
+        });
+
       }
 
       setInpValue(value);
@@ -85,6 +91,8 @@ const IdentityField = ({ name, value, finalize }) => {
 
 const Profile = () => {
   const [profile, setProfile] = useState(null);
+  const [error, setError] = useState(false);
+  const [editMessage, setEditMessage] = useState("");
 
   useEffect(() => {
     api
@@ -97,17 +105,20 @@ const Profile = () => {
       });
   }, []);
 
-  const handleEdit = (type, value) => {
-    api
-      .user
-      .updateCredential(type, value)
-      .then(result => {
-        if (result.ok) {
-          const profilePrime = { ...profile };
-          profilePrime[type] = value;
-          setProfile(profilePrime);
-        }
-      });
+  const handleEdit = async (type, value) => {
+    const result = await api.user.updateCredential(type, value);
+    if (result.ok) {
+      const profilePrime = { ...profile };
+      profilePrime[type] = value;
+      setProfile(profilePrime);
+      setEditMessage("Success");
+      setError(false);
+    } else {
+      setEditMessage(result.message);
+      setError(true);
+    }
+
+    return result.ok;
   };
   
   if (profile) {
@@ -123,6 +134,14 @@ const Profile = () => {
           </div>
           
           <div className="user-identity">
+            <div
+              className={error ? "error" : "success"}
+              style={{ 
+                display: editMessage ? "block" : "none"
+              }}
+            >
+              {editMessage}
+            </div>
             <IdentityField name={"Username"} value={profile.username} finalize={handleEdit} />
             <IdentityField name={"First Name"} value={profile.first_name} finalize={handleEdit} />
             <IdentityField name={"Last Name"} value={profile.last_name} finalize={handleEdit} />

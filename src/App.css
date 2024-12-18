@@ -418,6 +418,20 @@ main.main-app {
       display: flex;
       flex-direction: column;
       gap: 8px;
+
+      .error {
+        background-color: #f0838a;
+        color: white;
+        padding: 8px 16px;
+        border-radius: 8px;
+      }
+
+      .success {
+        background-color: #8cf084;
+        color: white;
+        padding: 8px 16px;
+        border-radius: 8px;
+      }
     }
 
     .label-value-pair {

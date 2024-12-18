@@ -42,7 +42,7 @@ export default {
   user: {
     getAllExceptMe: async () => { 
       const result = await fetch2("/user/get-all", "GET");
-      return result
+      return result;
     },
 
     getProfile: async () => await fetch2("/user", "GET"),

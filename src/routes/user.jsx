@@ -46,7 +46,7 @@ const User = () => {
   const userParam = useParams();
   const [users, setUsers] = useState([]);
 
-useEffect(() => {
+  useEffect(() => {
     api
       .user
       .getAllExceptMe()
