@@ -39,6 +39,8 @@ const MessageLi = ({ name, message, selected, setSelected }) => {
 const Message = () => {
   const [messagedUsers, setMessagedUsers] = useState([]);
   const [selectedIdx, setSelectedIdx] = useState(0);
+  const [maxExchangesHeight, setMaxExchangesHeight] = useState(0);
+  const [maxMessageListHeight, setMaxMessageListHeight] = useState(0);
 
   useEffect(() => {
     // TODO: fetch messaged users!
@@ -47,10 +49,46 @@ const Message = () => {
       console.log(result);
       setMessagedUsers([
         ...result.users,
+        ...result.users,
+        ...result.users,
+        ...result.users,
       ]);
     };
     
     fetchMessagedUsers();
+
+    const updateMaxHeight = () => {
+      // https://developer.mozilla.org/en-US/docs/Web/API/Window/innerHeight
+      // https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/offsetHeight
+      const h2Element = document.querySelector(".messages > .section-title");
+      const headerElement = document.querySelector(".chat-interface > header");
+      const formElement = document.querySelector(".chat-box > form");
+      if (headerElement && formElement && h2Element) {
+        const viewportHeight = window.innerHeight;
+        setMaxExchangesHeight(viewportHeight - (headerElement.offsetHeight + formElement.offsetHeight) - 1);
+        setMaxMessageListHeight(viewportHeight - h2Element.offsetHeight * 2.5); // WHY?
+        return true;
+      }
+
+      return false;
+    };
+
+    const observer = new MutationObserver(() => {
+      if (updateMaxHeight()) {
+        observer.disconnect();
+      }
+    });
+
+    observer.observe(document.body, {
+      childList: true,
+      subtree: true,
+    });
+
+    window.addEventListener('resize', updateMaxHeight);
+
+    return () => {
+      window.removeEventListener('resize', updateMaxHeight);
+    };
   }, []);
 
   const onSubmit = (e) => {
@@ -77,7 +115,10 @@ const Message = () => {
     <>
       <section className="messages">
         <h2 className="section-title">Messages</h2>
-        <ul className="messaged-users-list">
+        <ul
+          className="messaged-users-list"
+          style={{ maxHeight: maxMessageListHeight }}
+        >
           {messagedUsers.map((msg, idx) => (
               <MessageLi
                 key={msg.id}
@@ -96,7 +137,7 @@ const Message = () => {
         </header>
   
         <section className="chat-box">
-          <div className="exchanges">
+          <div className="exchanges" style={{ maxHeight: maxExchangesHeight }}>
             {
               (messagedUsers.length && messagedUsers[selectedIdx].messages[0]) ? (
                 messagedUsers[selectedIdx].messages.map((msg, idx) => (

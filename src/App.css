@@ -154,6 +154,7 @@ main.main-app {
   }
 
   .user-detail {
+    flex-grow: 1;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -223,13 +224,16 @@ main.main-app {
 .messages {
   border-right: 1px solid lightgray;
   padding: 16px;
+  flex-grow: 1;
+  flex-shrink: 0;
 
   ul {
     display: flex;
     flex-direction: column;
     gap: 4px;
+    overflow-y: auto;
 
-    li {
+    li {      
       display: flex;
       > button {
         border-radius: 8px;
@@ -293,7 +297,7 @@ main.main-app {
 }
 
 .chat-interface {
-  flex-grow: 1;
+  flex-grow: 50;
   border-right: 1px solid lightgray;
   display: flex;
   flex-direction: column;
@@ -315,7 +319,8 @@ main.main-app {
       padding: 16px;
       display: flex;
       flex-direction: column;
-      
+      overflow-y: auto;
+
       .message-exchange {
         .user-detail {
           display: flex;

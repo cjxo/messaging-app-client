@@ -68,7 +68,11 @@
         - [X] Error When Failure
 
 - [ ] Responsiveness
-  - [ ] Sidebar
+  - [X] Sidebar
+
+- [ ] Message Improvements
+  - [ ] Messaging Scrolling
+  - [ ] Decide what to do with long messages
 
 - [ ] Loading PagE!!!!!!!
     - Both Are used on Dash and Auth pages
