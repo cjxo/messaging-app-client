@@ -124,6 +124,7 @@ const Profile = () => {
   if (profile) {
     return (
       <section className="profile-view">
+        <h2 className="section-title">Profile</h2>
         <div className="user-detail">
           <div className="profile-pic">
             <Icon

@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import PropTypes from "prop-types";
 import Icon from '@mdi/react';
 import { mdilAccount } from '@mdi/light-js';
 import api from "../api/api";
@@ -75,7 +76,7 @@ const Message = () => {
   return (
     <>
       <section className="messages">
-        <h2 className="message-sidebar-title">Messages</h2>
+        <h2 className="section-title">Messages</h2>
         <ul className="messaged-users-list">
           {messagedUsers.map((msg, idx) => (
               <MessageLi
@@ -91,7 +92,7 @@ const Message = () => {
       </section>
       <section className="chat-interface">
         <header>
-          <h2 className="message-sidebar-title ">{messagedUsers.length ? messagedUsers[selectedIdx].first_name + " " + messagedUsers[selectedIdx].last_name : null}</h2>
+          <h2 className="section-title">{messagedUsers.length ? messagedUsers[selectedIdx].first_name + " " + messagedUsers[selectedIdx].last_name : null}</h2>
         </header>
   
         <section className="chat-box">
@@ -144,5 +145,12 @@ const Message = () => {
     </>
   );
 };
+
+MessageLi.propTypes = {
+  name: PropTypes.string.isRequired, 
+  message: PropTypes.string.isRequired,
+  selected: PropTypes.bool.isRequired,
+  setSelected: PropTypes.func.isRequired,
+}
 
 export default Message;

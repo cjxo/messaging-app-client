@@ -215,7 +215,7 @@ main.main-app {
   }
 }
 
-.message-sidebar-title {
+.section-title {
   font-weight: 500;
   margin-bottom: 16px;
 }
@@ -410,6 +410,7 @@ main.main-app {
 .profile-view {
   flex-grow: 1;
   display: flex;
+  padding: 16px;
   .user-detail {
     display: flex;
     flex-direction: column;
