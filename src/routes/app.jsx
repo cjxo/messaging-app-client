@@ -1,5 +1,6 @@
 import { Link, Outlet, useLocation, Navigate, useNavigate } from "react-router-dom";
 import { useState } from "react";
+import PropTypes from "prop-types";
 import {
   mdiAccountGroupOutline,
   mdiAccountGroup,
@@ -10,7 +11,6 @@ import {
   mdiLogout,
 } from '@mdi/js';
 import Icon from '@mdi/react';
-import api from "../api/api";
 import { useAuth } from "../hooks/Auth";
 
 const SidebarLi = ({ mdi, mdiO, title, to, selected }) => {
@@ -67,7 +67,13 @@ const App = () => {
     <div className="app">
       <main className="main-app">
         <section className="side-bar">
-          <h1 className="section-title">Message App</h1>    
+          <div className="logo">
+            <img
+              src="../../public/pics/messaging.png"
+              alt="Messaging App Logo"
+            />
+            <h1 className="section-title">Message App</h1>
+          </div>
           <ul>
             <SidebarLi
               mdi={mdiAccountGroup}
@@ -114,6 +120,14 @@ const App = () => {
       </main>
     </div>
   );
+};
+
+SidebarLi.propTypes = {
+  mdi: PropTypes.string.isRequired,
+  mdiO: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
+  to: PropTypes.string.isRequired,
+  selected: PropTypes.bool,
 };
 
 export default App;

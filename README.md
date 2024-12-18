@@ -63,9 +63,12 @@
         - [X] Fix Bug Where Not Displaying Added Users (This occurs when the user hasn't send any message yet)
         - [X] Working Message Sending
     
-    - [ ] Profile
+    - [X] Profile
         - [X] Working Profile Edit
-        - [ ] Error When Failure
+        - [X] Error When Failure
+
+- [ ] Responsiveness
+  - [ ] Sidebar
 
 - [ ] Loading PagE!!!!!!!
     - Both Are used on Dash and Auth pages
